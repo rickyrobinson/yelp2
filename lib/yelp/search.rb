@@ -1,5 +1,7 @@
-class Yelp::Search < Yelp
+class Yelp::Search < Yelp::Base
   PATH = '/v2/search'
+  
+  attr_reader :connection
 
   ACCEPTED_PARAMS = %w(
     term

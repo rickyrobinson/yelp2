@@ -69,8 +69,10 @@ module Yelp
         if item.name == "li"
           key = item.content.match(/\((.*)\)/)[1]
           name = item.content.match(/^(.*) \(/)[1]
-          cats << {:key => key, :name => name, :parent => parent}
-          prev = key
+          short_name = name.split[0]
+          prev = {:key => key, :name => name, :shortName => short_name, :parent => parent[:key], :numChildren => 0, :icon => "https://foursquare.com/img/categories/arts_entertainment/arcade_32.png"}
+          cats << prev
+          parent[:numChildren] += 1
         elsif item.name == "ul"
           subcats = self.extract_categories item.children, prev
           cats += subcats

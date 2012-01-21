@@ -69,7 +69,7 @@ module Yelp
         if item.name == "li"
           key = item.content.match(/\((.*)\)/)[1]
           name = item.content.match(/^(.*) \(/)[1]
-          cats << {:id => key, :name => name, :parent => parent}
+          cats << {:key => key, :name => name, :parent => parent}
           prev = key
         elsif item.name == "ul"
           subcats = self.extract_categories item.children, prev

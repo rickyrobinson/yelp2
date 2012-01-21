@@ -72,7 +72,7 @@ module Yelp
           short_name = name.split[0]
           prev = {:key => key, :name => name, :shortName => short_name, :parent => (parent ? parent[:key] : nil), :numChildren => 0, :icon => "https://foursquare.com/img/categories/arts_entertainment/arcade_32.png"}
           cats << prev
-          parent[:numChildren] += 1
+          parent[:numChildren] += 1 if parent
         elsif item.name == "ul"
           subcats = self.extract_categories item.children, prev
           cats += subcats

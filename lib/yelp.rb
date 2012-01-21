@@ -57,7 +57,7 @@ module Yelp
     end
   
     def get_categories
-      doc = Nokogiri::HTML(open("http://www.yelp.com/developers/documentation/category_list"))
+      doc = Nokogiri::HTML(open("http://www.yelp.com/developers/documentation/category_list").read)
       cats = doc.css("ul.attr-list").children
       self.extract_categories cats
     end

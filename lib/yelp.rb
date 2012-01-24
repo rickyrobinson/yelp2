@@ -68,15 +68,18 @@ module Yelp
       items.each do |item|
         if item.name == "li"
           parent_key = (parent ? parent[:key] : "")
-          key =
-            if parent_key.empty?
-              item.content.match(/\((.*)\)/)[1]
+          key = item.content.match(/\((.*)\)/)[1]
+          
+          parent_key_full = (parent ? parent[:key_full] : "")
+          key_full =
+            if parent_key_full.empty?
+              key
             else
-              "#{parent_key}_#{item.content.match(/\((.*)\)/)[1]}"
+              "#{parent_key_full}_#{key}"
             end
           name = item.content.match(/^(.*) \(/)[1]
           short_name = name.split[0]
-          prev = {:key => key, :name => name, :short_name => short_name, :parent_key => parent_key, :num_children => 0, :icon => "https://foursquare.com/img/categories/arts_entertainment/arcade_32.png"}
+          prev = {:key => key, :key_full => key_full, :name => name, :short_name => short_name, :parent_key => parent_key, :parent_key_full => parent_key_full, :num_children => 0, :icon => "https://foursquare.com/img/categories/arts_entertainment/arcade_32.png"}
           cats << prev
           parent[:num_children] += 1 if parent
         elsif item.name == "ul"

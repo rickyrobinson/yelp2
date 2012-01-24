@@ -49,7 +49,7 @@ module Yelp
     end
     
     def build_query(path, opts)
-      "#{path}?#{opts.map { |k,v| "#{k}=#{CGI.escape(v)}" }.join('&')}"
+      "#{path}?#{opts.map { |k,v| "#{k}=#{CGI.escape(v.to_s)}" }.join('&')}"
     end
   
     def categories
